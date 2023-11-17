@@ -50,7 +50,7 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
         var jwt = jwtService.generateToken(user);
 
         var refreshToken = jwtService.generateRefreshToken(new HashMap<>(), user);
-
+// test
         JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();
 
         jwtAuthenticationResponse.setToken(jwt);
