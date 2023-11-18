@@ -10,6 +10,7 @@ import com.kint.springsecurity.services.AuthenticationService;
 import com.kint.springsecurity.services.JWTService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,14 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
     }
 
     public JwtAuthenticationResponse signIn(SignInRequest signInRequest){
-        authenticationManager.authenticate((new UsernamePasswordAuthenticationToken(signInRequest.getEmail(),signInRequest.getPassword())));
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInRequest.getEmail(), signInRequest.getPassword()));
+        } catch (BadCredentialsException e) {
+            // Handle authentication failure
+            throw new IllegalArgumentException("Invalid Email or password", e);
+        }
+// If no exception is thrown, authentication was successful
+
 
         var user = userRepository.findByEmail(signInRequest.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid Email or password"));
         System.out.println("here" + user);
