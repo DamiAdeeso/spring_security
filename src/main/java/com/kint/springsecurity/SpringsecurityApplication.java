@@ -27,10 +27,11 @@ public class SpringsecurityApplication implements CommandLineRunner {
 		User adminAccount = userRepository.findByRole(Role.ADMIN);
 		if (adminAccount == null) {
 			User user = new User();
-			user.setFirstName("admin");
-			user.setSecondName("admin");
+			user.setFirstname("admin");
+			user.setLastname("admin");
 			user.setEmail("admin");
-			user.setPassword(new BCryptPasswordEncoder().encode("adminx	"));
+			user.setPassword(new BCryptPasswordEncoder().encode("admin"));
+			user.setPhonenumber("0903456789");
 			user.setRole(Role.ADMIN);
 			userRepository.save(user);
 		}

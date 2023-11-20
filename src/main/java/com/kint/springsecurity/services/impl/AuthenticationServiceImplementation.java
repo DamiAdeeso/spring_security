@@ -29,21 +29,24 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
 
     private final JWTService jwtService;
 
+//    private final SignInResponse signInResponse;
+
 
     public User signUp(SignUpRequest signUpRequest){
         User user = new User();
 
         user.setEmail(signUpRequest.getEmail());
-        user.setFirstName((signUpRequest.getFirstName()));
-        user.setSecondName(signUpRequest.getSecondName());
+        user.setFirstname((signUpRequest.getFirstname()));
+        user.setLastname(signUpRequest.getLastname());
         user.setRole(Role.USER);
+        user.setPhonenumber(signUpRequest.getPhonenumber());
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
         userRepository.save(user);
         return user;
     }
 
-    public JwtAuthenticationResponse signIn(SignInRequest signInRequest){
+    public SignInResponse signIn(SignInRequest signInRequest){
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInRequest.getEmail(), signInRequest.getPassword()));
         } catch (BadCredentialsException e) {
@@ -64,7 +67,9 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
         jwtAuthenticationResponse.setToken(jwt);
         jwtAuthenticationResponse.setRefreshtoken(refreshToken);
 
-        return jwtAuthenticationResponse;
+
+//        return jwtAuthenticationResponse;
+        return new SignInResponse(user,jwtAuthenticationResponse);
     }
 
 }

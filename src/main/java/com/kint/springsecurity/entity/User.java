@@ -1,6 +1,7 @@
 package com.kint.springsecurity.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,16 +17,28 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "user_Id", length = 45)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long userid;
 
-    private String firstName;
+    @Column(name = "first_name", length = 255)
+    private String firstname;
 
-    private String secondName;
 
+    @Column(name = "last_name", length = 255)
+    private String lastname;
+
+    @Column(name = "email", length = 255)
     private String email;
 
+
+    @Column(name = "password", length = 255)
+    @JsonIgnore
     private String password;
+
+
+    @Column(name = "phone_number", length = 255)
+    private String phonenumber;
 
     private Role role;
 

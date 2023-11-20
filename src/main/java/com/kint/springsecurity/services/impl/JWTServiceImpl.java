@@ -34,7 +34,7 @@ public class JWTServiceImpl implements JWTService {
     }
 
     private Key getSigninKey() {
-        byte[] key = Decoders.BASE64.decode("cvbnm");
+        byte[] key = Decoders.BASE64.decode("e9b8f0bde58bcd5a89cdc459eff0e894b2920f4fc7aefc8bdc7a5637280174c3");
 
         return Keys.hmacShaKeyFor(key);
     }
