@@ -35,5 +35,5 @@ public class SpringsecurityApplication implements CommandLineRunner {
 			user.setRole(Role.ADMIN);
 			userRepository.save(user);
 		}
-	}
+	}//git push
 }
