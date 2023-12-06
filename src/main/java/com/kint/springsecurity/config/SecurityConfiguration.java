@@ -28,7 +28,7 @@ public class SecurityConfiguration {
     private final UserService userService;
 
 
-
+//    private final PasswordEncoder passwordEncoder;
 
 
     @Bean
